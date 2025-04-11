@@ -1,4 +1,24 @@
-
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+input:focus-visible {
+  outline: none !important;
+  box-shadow: none !important;
+}
+
+/* 👁️‍🗨️ Animazione occhio realistico */
+@keyframes pulseEye {
+  0%, 100% {
+    transform: scale(1);
+    box-shadow: 0 0 20px #3b82f6, 0 0 40px #3b82f6;
+  }
+  50% {
+    transform: scale(1.05);
+    box-shadow: 0 0 30px #3b82f6, 0 0 60px #3b82f6;
+  }
+}
+
+.animate-pulseEye {
+  animation: pulseEye 3s ease-in-out infinite;
+}
