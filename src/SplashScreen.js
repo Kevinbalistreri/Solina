@@ -12,13 +12,14 @@ export default function SplashScreen({ onComplete }) {
     <div className="min-h-screen bg-black flex flex-col items-center justify-center relative overflow-hidden">
       {/* Immagine Cinematografica */}
       <motion.img
-        src="/solina-splash.png"
-        alt="Solina Splash"
-        initial={{ opacity: 0 }}
-        animate={{ opacity: 1 }}
-        transition={{ duration: 1.5 }}
-        className="absolute inset-0 w-full h-full object-cover opacity-80"
-      />
+  src="solina-splash.png"
+  alt="Solina Splash"
+  initial={{ opacity: 0 }}
+  animate={{ opacity: 1 }}
+  transition={{ duration: 1.5 }}
+  className="absolute inset-0 w-full h-full object-cover"
+  loading="eager"
+/>
 
       {/* Sovrascritta SOLINA */}
       <motion.h1
