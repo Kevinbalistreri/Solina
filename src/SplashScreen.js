@@ -12,7 +12,7 @@ export default function SplashScreen({ onComplete }) {
     <div className="min-h-screen bg-black flex flex-col items-center justify-center relative overflow-hidden">
       {/* Immagine Cinematografica */}
       <motion.img
-  src="solina-splash.png"
+  src="/solina-splash.png"
   alt="Solina Splash"
   initial={{ opacity: 0 }}
   animate={{ opacity: 1 }}
