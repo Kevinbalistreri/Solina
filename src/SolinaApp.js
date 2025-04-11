@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { Dialog } from "@headlessui/react";
+import NeuralBackground from "./components/NeuralBackground";
 
 export default function SolinaApp() {
   const [stage, setStage] = useState("login");
@@ -59,9 +60,10 @@ export default function SolinaApp() {
 
   return (
     <div className="relative min-h-screen text-white p-6 flex flex-col items-center justify-center overflow-hidden bg-[#0f0f1b]">
-      <img src="/solina-bg2.png" alt="Solina background" className="absolute inset-0 w-full h-full object-cover z-0 opacity-70" />
-
+      
+      <NeuralBackground /> {/* Sfondo animato neurale */}
       <AnimatePresence mode="wait">
+        
         {stage === "login" && (
           <motion.div key="login" initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }} className="relative z-10 flex flex-col items-center justify-center space-y-6">
             <motion.h1 initial={{ opacity: 0, y: -20 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 1.5 }} className="text-6xl font-extrabold tracking-wide text-transparent bg-clip-text bg-gradient-to-r from-cyan-400 to-blue-600 animate-glow">
