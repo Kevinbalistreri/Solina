@@ -1,0 +1,60 @@
+/* src/assets/BrainNeural.css */
+
+.brain-container {
+  position: relative;
+  width: 220px;
+  height: 220px;
+  margin-top: -30px;
+  z-index: 10;
+}
+
+.brain-image {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  filter: brightness(1.2) contrast(1.3);
+  position: relative;
+  z-index: 10;
+  animation: shimmerFlow 5.5s ease-in-out infinite;
+  mask-image: linear-gradient(
+    -60deg,
+    rgba(0, 0, 0, 0.8) 40%,
+    rgba(0, 0, 0, 0.4) 50%,
+    rgba(0, 0, 0, 0.8) 60%
+  );
+  -webkit-mask-image: linear-gradient(
+    -60deg,
+    rgba(0, 0, 0, 0.8) 40%,
+    rgba(0, 0, 0, 0.4) 50%,
+    rgba(0, 0, 0, 0.8) 60%
+  );
+  mask-size: 200% 200%;
+  -webkit-mask-size: 200% 200%;
+  mask-repeat: no-repeat;
+  -webkit-mask-repeat: no-repeat;
+}
+
+@keyframes shimmerFlow {
+  0% {
+    mask-position: 200% 0%;
+    -webkit-mask-position: 200% 0%;
+  }
+  100% {
+    mask-position: -200% 0%;
+    -webkit-mask-position: -200% 0%;
+  }
+}
+/* src/assets/BrainNeural.css */
+
+@keyframes brainGlowPulse {
+  0%, 100% {
+    filter: brightness(1) drop-shadow(0 0 10px #00f0ff);
+  }
+  50% {
+    filter: brightness(1.3) drop-shadow(0 0 30px #00f0ff);
+  }
+}
+
+.animate-brain-glow {
+  animation: brainGlowPulse 3s ease-in-out infinite;
+}

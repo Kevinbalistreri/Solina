@@ -2,6 +2,9 @@ import React, { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { Dialog } from "@headlessui/react";
 import NeuralBackground from "./components/NeuralBackground";
+import "./assets/interactive-effects.css";
+import "./assets/BrainNeural.css";
+
 
 export default function SolinaApp() {
   const [stage, setStage] = useState("login");
@@ -20,7 +23,7 @@ export default function SolinaApp() {
 
   useEffect(() => {
     if (stage === "neural") {
-      const timer = setTimeout(() => setStage("generated"), 3000);
+      const timer = setTimeout(() => setStage("generated"), 9000);
       return () => clearTimeout(timer);
     }
   }, [stage]);
@@ -60,10 +63,8 @@ export default function SolinaApp() {
 
   return (
     <div className="relative min-h-screen text-white p-6 flex flex-col items-center justify-center overflow-hidden bg-[#0f0f1b]">
-      
-      <NeuralBackground /> {/* Sfondo animato neurale */}
+      <NeuralBackground />
       <AnimatePresence mode="wait">
-        
         {stage === "login" && (
           <motion.div key="login" initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }} className="relative z-10 flex flex-col items-center justify-center space-y-6">
             <motion.h1 initial={{ opacity: 0, y: -20 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 1.5 }} className="text-6xl font-extrabold tracking-wide text-transparent bg-clip-text bg-gradient-to-r from-cyan-400 to-blue-600 animate-glow">
@@ -75,7 +76,7 @@ export default function SolinaApp() {
             <motion.form onSubmit={handleLogin} className="w-full max-w-sm space-y-4" initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ delay: 1.2 }}>
               <Input label="Email" name="email" type="email" value={loginData.email} onChange={handleLoginChange} placeholder="you@email.com" />
               <Input label="Password" name="password" type="password" value={loginData.password} onChange={handleLoginChange} placeholder="••••••••" />
-              <button type="submit" className="w-full bg-blue-600 hover:bg-blue-700 py-3 rounded-xl text-lg font-bold shadow-xl transition">Accedi / Registrati</button>
+              <button type="submit" className="animated-button w-full">Accedi / Registrati</button>
             </motion.form>
           </motion.div>
         )}
@@ -89,37 +90,59 @@ export default function SolinaApp() {
               <Input label="Date flessibili?" name="dates" value={formData.dates} onChange={handleChange} placeholder="Dal 10 al 20 agosto" />
               <Input label="Età" name="age" value={formData.age} onChange={handleChange} placeholder="Es. 22" />
               <Input label="Budget" name="budget" value={formData.budget} onChange={handleChange} placeholder="Es. 1000€" />
-              <button type="submit" className="w-full mt-6 py-4 rounded-xl bg-gradient-to-r from-cyan-400 to-blue-500 text-black font-bold text-lg shadow-lg hover:scale-105 transition-all">
-                Genera il mio viaggio
-              </button>
+              <button type="submit" className="animated-button w-full mt-6">Genera il mio viaggio</button>
             </form>
           </motion.div>
         )}
 
-        {stage === "neural" && (
-          <motion.div key="neural" initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }} className="relative z-10 mt-12 text-center">
-            <h2 className="text-3xl font-semibold text-blue-400">Analisi neurale in corso...</h2>
-          </motion.div>
-        )}
+{/* Sezione "neural" aggiornata */}
+{stage === "neural" && (
+  <motion.div
+    key="neural"
+    initial={{ opacity: 0 }}
+    animate={{ opacity: 1 }}
+    exit={{ opacity: 0 }}
+    className="relative z-10 min-h-screen flex flex-col items-center justify-center space-y-10 text-center px-4"
+  >
+    {/* Glow radiale */}
+    <div className="absolute w-[250px] h-[250px] rounded-full blur-3xl bg-cyan-400/10 animate-ping z-0 top-[-40px]" />
 
+    {/* Immagine cervello spostata + più piccola */}
+    <div className="relative w-[200px] h-[200px] z-10 mt-[-60px]">
+      <img
+        src="/brain-neural.png"
+        alt="Neural"
+        className="w-full h-full object-contain"
+      />
+    </div>
+
+    {/* Testo cinematico */}
+    <motion.h2
+  initial={{ opacity: 0 }}
+  animate={{ opacity: 1 }}
+  transition={{ delay: 0.2, duration: 0.5 }}
+  className="text-battery text-center"
+>
+  Scanning neural patterns to match your soul with the world...
+</motion.h2>
+  </motion.div>
+)}
         {stage === "generated" && (
           <motion.div key="generated" initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }} className="relative z-10 w-full max-w-3xl mt-12 space-y-6">
             <h2 className="text-2xl font-bold text-blue-400">Pacchetto Personalizzato</h2>
             <div className="grid md:grid-cols-2 gap-6">
               {Object.entries(packageData).map(([key, value]) => (
-                <div key={key} className="bg-white/5 backdrop-blur-md border border-blue-800 rounded-xl p-4 transition hover:shadow-lg group">
+                <div key={key} className="bg-white/5 backdrop-blur-md border border-cyan-400/20 rounded-2xl p-4 transition hover:shadow-xl hover:bg-white/10 group">
                   <div className="flex justify-between items-center mb-2">
                     <h3 className="uppercase text-sm tracking-widest text-blue-400">{key}</h3>
-                    <button onClick={() => setEditField(key)} type="button" className="text-blue-400 hover:text-white transition text-xs border border-blue-400 px-2 py-1 rounded-lg">Modifica</button>
+                    <button onClick={() => setEditField(key)} type="button" className="animated-button text-xs px-2 py-1">Modifica</button>
                   </div>
                   <p className="text-sm text-gray-300 group-hover:text-white transition">{value}</p>
                 </div>
               ))}
             </div>
             <div className="mt-8 text-center">
-              <button onClick={handleConfirmation} className="px-8 py-4 rounded-xl text-black text-lg font-bold bg-gradient-to-br from-cyan-400 to-blue-600 hover:from-cyan-300 hover:to-blue-500 transition-all shadow-lg animate-[pulse_2s_infinite] hover:scale-105">
-                Conferma il pacchetto
-              </button>
+              <button onClick={handleConfirmation} className="animated-button px-8 py-4 mt-6">Conferma il pacchetto</button>
             </div>
           </motion.div>
         )}
@@ -129,16 +152,14 @@ export default function SolinaApp() {
             <h2 className="text-3xl font-bold text-blue-400 mb-6">Riepilogo del tuo Viaggio</h2>
             <div className="grid md:grid-cols-2 gap-6">
               {Object.entries(packageData).map(([key, value]) => (
-                <div key={key} className="bg-[#111827] border border-blue-700 p-5 rounded-xl shadow-inner backdrop-blur-md">
+                <div key={key}className="bg-white/5 backdrop-blur-md border border-cyan-400/20 rounded-2xl p-5 transition hover:shadow-xl hover:bg-white/10">
                   <h4 className="text-blue-400 text-sm uppercase tracking-wider mb-2">{key}</h4>
                   <p className="text-gray-300 text-sm leading-relaxed">{value}</p>
                 </div>
               ))}
             </div>
             <div className="mt-10">
-              <button onClick={() => setStage("checkout")} className="text-lg font-semibold px-10 py-4 bg-gradient-to-r from-blue-600 to-cyan-500 rounded-full text-black shadow-lg hover:scale-105 focus:outline-none focus:ring-4 focus:ring-blue-800 animate-pulse">
-                Procedi con la prenotazione
-              </button>
+              <button onClick={() => setStage("checkout")} className="animated-button px-10 py-4">Procedi con la prenotazione</button>
             </div>
           </motion.div>
         )}
@@ -158,9 +179,7 @@ export default function SolinaApp() {
                   <Input label="Scadenza" name="expiry" value={paymentData.expiry} onChange={handlePaymentChange} placeholder="MM/AA" />
                   <Input label="CVV" name="cvv" value={paymentData.cvv} onChange={handlePaymentChange} placeholder="123" />
                 </div>
-                <button type="submit" className="w-full mt-6 py-4 rounded-full bg-gradient-to-r from-blue-500 to-cyan-400 text-black font-bold text-lg shadow-lg hover:scale-105 transition-all animate-pulse">
-                  Clicca e paga!
-                </button>
+                <button type="submit" className="animated-button w-full mt-6">Clicca e paga!</button>
               </form>
             )}
           </motion.div>
@@ -174,7 +193,7 @@ export default function SolinaApp() {
             <motion.div initial={{ opacity: 0, scale: 0.95 }} animate={{ opacity: 1, scale: 1 }} exit={{ opacity: 0, scale: 0.95 }} transition={{ duration: 0.3 }} className="relative z-50 bg-[#111827] p-6 rounded-xl shadow-2xl w-full max-w-md border border-blue-700">
               <Dialog.Title className="text-lg font-bold text-blue-400 mb-4">Modifica {editField}</Dialog.Title>
               {[1, 2, 3].map((num) => (
-                <button key={num} className="w-full text-left bg-white/5 hover:bg-white/10 text-white p-3 mb-2 rounded-lg transition" onClick={() => handleFieldUpdate(editField, `${editField} alternativa ${num}`)}>
+                <button key={num} className="animated-button w-full text-left p-3 mb-2 text-white rounded-lg transition" onClick={() => handleFieldUpdate(editField, `${editField} alternativa ${num}`)}>
                   Suggerimento intelligente {num}
                 </button>
               ))}

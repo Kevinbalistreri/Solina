@@ -1,0 +1,119 @@
+.animated-button {
+  position: relative;
+  padding: 1rem 2rem;
+  border-radius: 9999px;
+  font-weight: bold;
+  font-size: 1.125rem;
+  background: linear-gradient(to right, #00e0ff, #007bff);
+  color: black;
+  box-shadow: 0 0 20px rgba(0, 255, 255, 0.3);
+  overflow: hidden;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  z-index: 1;
+}
+
+.animated-button::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 200%;
+  height: 100%;
+  background: linear-gradient(120deg, rgba(0, 255, 255, 0.2), rgba(0, 255, 255, 0.6), rgba(0, 255, 255, 0.2));
+  transform: skewX(-45deg);
+  animation: trail 2.5s linear infinite;
+  z-index: 0;
+}
+
+.animated-button:hover {
+  transform: scale(1.04);
+  box-shadow: 0 0 40px rgba(0, 255, 255, 0.6);
+}
+
+@keyframes trail {
+  0% {
+    left: -100%;
+  }
+  100% {
+    left: 100%;
+  }
+}
+
+.neural-scan-light {
+  position: relative;
+  overflow: hidden;
+}
+
+.neural-scan-light::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: -50%;
+  height: 100%;
+  width: 50%;
+  background: linear-gradient(to right, transparent, #0ff, transparent);
+  animation: scanMove 1.8s infinite ease-in-out;
+}
+
+@keyframes scanMove {
+  0% {
+    left: -50%;
+  }
+  50% {
+    left: 100%;
+  }
+  100% {
+    left: 100%;
+  }
+}
+
+/* ✨ Testo glow lento e ciclico */
+@keyframes textShineSlow {
+  0% {
+    background-position: 0% center;
+  }
+  100% {
+    background-position: 300% center;
+  }
+}
+
+.animate-text-shine-slow {
+  animation: textShineSlow 6s ease-in-out infinite;
+  background: linear-gradient(to right, #06b6d4, #3b82f6, #06b6d4);
+  background-size: 300% auto;
+  background-clip: text;
+  -webkit-background-clip: text;
+  color: transparent;
+}
+
+/* 🔋 Batteria che si carica */
+.text-battery {
+  font-weight: 800;
+  text-transform: uppercase;
+  font-size: 1.25rem;
+  letter-spacing: 0.05em;
+  background: linear-gradient(
+    to right,
+    #00ffff 0%,
+    #00d2ff 20%,
+    #007aff 40%,
+    #00d2ff 60%,
+    #00ffff 80%,
+    #007aff 100%
+  );
+  background-size: 500% auto;
+  background-clip: text;
+  -webkit-background-clip: text;
+  color: transparent;
+  animation: batteryGlow 30s ease-in-out infinite;
+  filter: drop-shadow(0 0 10px #00ffff) drop-shadow(0 0 20px #007aff);
+}
+
+@keyframes batteryGlow {
+  0% {
+    background-position: 500% center;
+  }
+  100% {
+    background-position: 0% center;
+  }
+}
